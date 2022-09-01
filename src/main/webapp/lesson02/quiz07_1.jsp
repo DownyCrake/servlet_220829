@@ -34,8 +34,6 @@
 
 </head>
 <body>
-<h1 class="text-center">검색결과</h1>
-
 <%
 List<Map<String, Object>> list = new ArrayList<>();
 Map<String, Object> map = new HashMap<String, Object>() {{ put("name", "버거킹"); put("menu", "햄버거"); put("point", 4.3); } };
@@ -56,22 +54,55 @@ list.add(map);
 
 <%
 	String order = request.getParameter("order");
-	
+	String exception = request.getParameter("exception");
 
-	for (int i = 0; i < map.size(); i++) {
-		HashMap<String, Object> review = new HashMap<String, Object>(list.get(i));
-		
-		Set<String> keys = review.keySet();
-		Iterator<String> iter = keys.iterator();
-		
-			
-		
+	List<Map<String, Object>> newlist = new ArrayList<>();
+	
+	if ( list != null) { 
+		for (int i = 0; i < list.size(); i++) {
+			if (order.equals(list.get(i).get("menu")) ){
+				map = new HashMap<String, Object>(list.get(i));
+				newlist.add(map);
+			}
+		}
 	}
+	
+	if (exception != null) {
+		
+		for( Iterator<Map<String, Object>> iter = newlist.iterator(); iter.hasNext();) {
+            Map<String, Object> del = iter.next();
+                if( (double)del.get("point") <= 4  )  {
+                iter.remove();
+                }
+        }
+	}
+	
 %>
 
+<div class="contaioner">
+<h1 class="text-center">검색 결과</h1>
+<table class="table text-center">
+	<tr>
+		<th>메뉴</th>
+		<th>상호</th>
+		<th>별점</th>
+	</tr>
+<%
+	for (int i = 0; i < newlist.size(); i++) {
+		String name = String.valueOf( newlist.get(i).get("menu") );
+		String menu = String.valueOf( newlist.get(i).get("name") );
+		String point = String.valueOf( newlist.get(i).get("point") );
+%>
+	<tr>
+		<td> <%= name %> </td>
+		<td> <%= menu %> </td>
+		<td> <%= point %> </td>
+	</tr>
+<%
+	}
+%>
+</table>
 
-
-
-
+<div>
 </body>
 </html>

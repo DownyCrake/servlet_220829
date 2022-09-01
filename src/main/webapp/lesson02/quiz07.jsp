@@ -37,7 +37,7 @@
 	<div class="d-flex align-items-center">
 		<input type="text" class="form-control col-3 mr-2" name="order" placeholder="메뉴를 입력하세요.">
 		<label>
-		<input type="checkbox" name="exception">
+		<input type="checkbox" name="exception" value="over4">
 		4점 이하 제외
 		</label>		
 	</div>
