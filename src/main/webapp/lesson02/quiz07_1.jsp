@@ -82,11 +82,14 @@ list.add(map);
 <div class="contaioner">
 <h1 class="text-center">검색 결과</h1>
 <table class="table text-center">
-	<tr>
-		<th>메뉴</th>
-		<th>상호</th>
-		<th>별점</th>
-	</tr>
+	<thead>
+		<tr>
+			<th>메뉴</th>
+			<th>상호</th>
+			<th>별점</th>
+		</tr>
+	</thead>
+	<tbody>
 <%
 	for (int i = 0; i < newlist.size(); i++) {
 		String name = String.valueOf( newlist.get(i).get("menu") );
@@ -101,6 +104,7 @@ list.add(map);
 <%
 	}
 %>
+	</tbody>
 </table>
 
 <div>
