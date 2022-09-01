@@ -36,9 +36,10 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 <div class="container">
 	<h1>오늘부터 1일</h1>
 <%
-	for (int i = 100; i <= 1000; i +=100) {
 		Calendar date = Calendar.getInstance();
-		date.add(Calendar.DATE, i -1 );	
+		date.add(Calendar.DATE, -1);	
+	for (int i = 1; i <= 10; i ++) {
+		date.add(Calendar.DATE, 100);	
 %>		
 	<span class="display-4"><%= i %>일: </span>
 	<span class="display-4 text-danger"> <%= sdf.format(date.getTime()) %></span><br>
