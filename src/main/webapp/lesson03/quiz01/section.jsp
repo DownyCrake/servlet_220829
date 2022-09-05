@@ -138,14 +138,11 @@ map = new HashMap<String, String>() {
 };
 list.add(map);
 
-
-
-
 String category = request.getParameter("category");
-
-
 %>
 
+
+<section>
 
 <section>
 	<table class="table text-center">
@@ -173,20 +170,17 @@ String category = request.getParameter("category");
 
 			} else {
 
-			for (int i = 0; i < list.size(); i++) {
-				
-				for (Map<String, String> item : list) {
-					if (item.get("category").equals(category)) {
+			for (Map<String, String> item : list) {
+			if (item.get("category").equals(category)) {
 			%>
 
 			<tr class="row ">
-				<td class="col-2"><%=list.get(i).get("ch")%></td>
-				<td class="col-5"><%=list.get(i).get("name")%></td>
-				<td class="col-5"><%=list.get(i).get("category")%></td>
+				<td class="col-2"><%=item.get("ch")%></td>
+				<td class="col-5"><%=item.get("name")%></td>
+				<td class="col-5"><%=item.get("category")%></td>
 			</tr>
 			<%
-					}
-				}
+			}
 			}
 			}
 			%>
