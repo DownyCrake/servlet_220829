@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -5,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>jsp 종합문제</title>
+<title>이번달 달력</title>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
@@ -27,44 +28,50 @@
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
 
-
-<style>
-header {
-	height: 100px;
-}
-
-nav {
-	height: 80px;
-}
-
-footer {
-	height: 100px;
-}
-
-a:hover {
-	text-decoration: none !important
-}
-</style>
-
 </head>
 <body>
+	<%
+	Calendar date = Calendar.getInstance();
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+	int today = date.get(Calendar.DATE);
+	date.add(Calendar.DATE, -today + 1);
+	int firstWeek = date.get(Calendar.DAY_OF_WEEK);
+	int lastDay = date.getActualMaximum(Calendar.DAY_OF_MONTH);
+	%>
 	<div class="container">
-
-		<jsp:include page="header.jsp" />
-		<jsp:include page="nav.jsp" />
-		<%
-		if ((request.getParameter("id") == null) && (request.getParameter("title") == null)) {
-		%>
-		<jsp:include page="main1.jsp" />
-		<%
-		} else {
-		%>
-		<jsp:include page="main2.jsp" />
-		<%
-		}
-		%>
-		<jsp:include page="footer.jsp" />
-
+		<h1 class="text-center"><%=sdf.format(date.getTime())%></h1>
+		<table class="table text-center">
+			<thead>
+				<tr>
+					<th class="text-danger">일</th>
+					<th>월</th>
+					<th>화</th>
+					<th>수</th>
+					<th>목</th>
+					<th>금</th>
+					<th>토</th>
+				</tr>
+			</thead>
+			<tbody class="display-4">
+				<tr>
+					<%
+					for (int i = 1; i < firstWeek; i++) {
+					%>
+					<td></td>
+					<%
+					}
+					for (int i = 1; i <= lastDay; i++) {
+					%>
+					<td><%= i %></td>
+					<%
+						if ((firstWeek -1 + i) % 7 == 0) {
+						out.print("</tr><tr>");
+						}
+					}
+					%>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </body>
 </html>
