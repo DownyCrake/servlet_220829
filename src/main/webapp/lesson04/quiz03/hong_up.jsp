@@ -45,7 +45,7 @@ header {background-color: coral; height:150px;}
 
 <div class="wrap">
 	<jsp:include page="header.jsp"/>
-	<jsp:include page="list.jsp"/>
+	<jsp:include page="upload.jsp"/>
 	<jsp:include page="footer.jsp"/>
 
 </div>
